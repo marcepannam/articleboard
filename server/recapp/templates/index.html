@@ -1,0 +1,23 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="static/css/main.css" />
+    <title>{% block title %} Article Recommender {% endblock %}</title>
+</head>
+
+<body id="main-body">
+    <div id="main-container">
+        <div id="main-page-body">
+            <div id="main-title"> Article Recommender </div>
+            <div id="main-text"> The apps to recommend articles for a variety of topics, to start your journey with the article recommender just create a new dashboard and define the keywords for a topic!</div>
+        <div id="main-buttons">
+                <a class='main-link' href="{% url 'login' %}">{% trans "Log in" %}</a>
+                <a class='main-link' href="{% url 'django_registration_register' %}">{% trans "Register" %}</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

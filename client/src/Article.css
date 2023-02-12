@@ -1,0 +1,63 @@
+.green-buttons {
+    justify-content: right;
+}
+
+.article {
+    border-top: solid 1px black;
+    padding: 1em;
+    margin: 1em;
+    padding-bottom: 0;
+}
+
+.article-title {
+    margin: 10px 0;
+}
+
+.article-title a {
+    color: black !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.article-description{
+    text-align: justify;
+    margin-top: 20px;
+}
+
+.link {
+    margin: 10px 0;
+    font-size: 90%;
+    color: #888;
+    display: flex;
+    justify-content: left;
+    width: 100%;
+}
+
+.dashboard-link {
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.dashboard-link-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.flag {
+    justify-self: flex-start;
+}
+
+.flag button {
+    background: none;
+    color: #888 !important;
+}
+
+
+.flag button:hover {
+    background: none;
+    color: red !important;
+    border-color: red !important;
+}
