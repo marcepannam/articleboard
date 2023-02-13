@@ -9,7 +9,7 @@ import { useHttp } from './UseHttp';
 
 const csrftoken = getCookie('csrftoken');
 
-export function DashboardEditModal({ id, onHide, dashboard }: { id: null | string, onHide: () => void, dashboard?: { keywords: string, dashboard_title: string, notifications: string } }) {
+export function DashboardEditModal({ id, onHide, refreshDasboardList, dashboard }: { id: null | string, onHide: () => void, refreshDasboardList?: () => void, dashboard?: { keywords: string, dashboard_title: string, notifications: string } }) {
 	let saveDashboard = async (values: any) => {
 
 		const response = await fetch(
@@ -21,6 +21,9 @@ export function DashboardEditModal({ id, onHide, dashboard }: { id: null | strin
 			    headers: { 'X-CSRFToken': csrftoken, 'content-type': 'application/x-www-form-urlencoded' },
 			}
 		);
+
+		if(refreshDasboardList)
+			refreshDasboardList();
 
 		onHide();
 		if (id === null) {

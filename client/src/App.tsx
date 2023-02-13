@@ -116,9 +116,14 @@ function Main() {
 		
 		<div id='content'>
 			{newDashboardModalIsOpen ?
-			<DashboardEditModal id={null} onHide={hideDashboardEditModal} />
+			<DashboardEditModal id={null} onHide={hideDashboardEditModal} refreshDasboardList={refresh} />
 			: null}
 			<Routes>
+				<Route path="/app/" element={
+					<Dashboard
+						key={"all"}
+						id={"all"}
+						filter={"new"}/>}/>
 				<Route path="/app/dashboard" element={
 					<Dashboard
 						key={search.get('id')}

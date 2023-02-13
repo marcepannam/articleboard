@@ -30,17 +30,18 @@ export function Dashboard({ id, filter } : {id : string; filter: string | null})
     
     let hideDashboardEditModal = useCallback(() => { setEditModalIsOpen(false); refresh() }, [setEditModalIsOpen])
     let showDashboardEditModal = useCallback(() => { setEditModalIsOpen(true); }, [setEditModalIsOpen])    
+    let isShowRecommendations = (filter == 'new' || !filter);
 
-    let dashboardEmpty = !dashboard?.articles || dashboard.articles.every((article:{id:string}) => (
+    let dashboardEmpty = isShowRecommendations && (!dashboard?.articles || dashboard.articles.every((article:{id:string}) => (
         removedIds.get(article.id) == true   
-    ));
+    )));
 
     useEffect(() => {
         if (!loading && dashboardEmpty)
             setTimeout(() => refresh(), 1000);
     }, [loading, dashboardEmpty]);
 
-    if(dashboardEmpty){ 
+    if(dashboardEmpty && isShowRecommendations){ 
         
         if(id==='all'){
         return <div className='loading empty-dashboard'> Please create a first dashboard to get recommendations.</div>}

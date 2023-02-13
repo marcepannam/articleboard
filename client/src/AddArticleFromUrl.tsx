@@ -38,7 +38,7 @@ export function AddArticleFromUrl({dashboards}: {dashboards: {id:number; title: 
 	}
 
 	if (responseJson.ok) {
-	    setState('none');
+	    setState('success');
 	    form.resetFields()
 	}
 	else setState('error')
@@ -70,5 +70,6 @@ export function AddArticleFromUrl({dashboards}: {dashboards: {id:number; title: 
 		  </Form>
 	       { state === 'loading' ? <Spin />  : null}
 	       { state === 'error' ? <Alert message="Failed to download article" type="error" />  : null}
+		   { state === 'success' ? <Alert  message='Article was successfully added to the liked in the dashboard.'/>:null}
 	   </div>;
 }

@@ -19,6 +19,10 @@ class Url(models.Model):
     source = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return 'url=%r' % (self.url)
+    
+
 class Response(models.Model):
     ''' Represents a response from a URL.'''
     url = models.ForeignKey(Url, on_delete=models.CASCADE, default="")
