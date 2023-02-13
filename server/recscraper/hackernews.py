@@ -1,3 +1,4 @@
+# Fetches article URLs using HackerNews API
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'recproject.settings'
 import django, requests, json
@@ -10,6 +11,7 @@ from .article_downloader import download_and_save
 headers = {'user-agent': 'article-recommender'}
 
 def get_urls_from_hn(index):
+    # Get the top 100 stories
     url = "https://hacker-news.firebaseio.com/v0/" + index + ".json?print=pretty"
     results = requests.get(url, headers=headers)
 
@@ -31,8 +33,9 @@ def get_urls(index):
             ).save()
             
 if __name__ == '__main__':
+    # download most recent stories
     get_urls('newstories')
+    # ...and current high scored ones
     get_urls('topstories')
     
-    #todo to run it in independet process
     download_and_save()

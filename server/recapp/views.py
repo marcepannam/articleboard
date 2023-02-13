@@ -3,7 +3,6 @@ from django.http import JsonResponse, QueryDict, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core import mail
 from . import models
-from recscraper import article_downloader
 from django.utils import timezone
 import json
 from random import shuffle
@@ -45,7 +44,6 @@ def dashboard(request):
     
     if request.GET['id'] == 'all':
         articles = models.DashboardArticle.objects.filter(dashboard__user=request.user).order_by('?').prefetch_related('dashboard')
-        #shuffle(articles)
         dashboard_title = 'All'
         keywords = ''
         dashboard_notifications = ''

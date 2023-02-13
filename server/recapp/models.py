@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
-# Create your models here.
-
 class Dashboard(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=500, unique=True)
@@ -16,11 +14,13 @@ class Dashboard(models.Model):
         return 'Dashboard(%r, %r)' % (self.user, self.title)
 
 class Url(models.Model):
+    ''' Represents a URL that will or was scraped. '''
     url = models.CharField(max_length=200, unique=True)
     source = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
 
 class Response(models.Model):
+    ''' Represents a response from a URL.'''
     url = models.ForeignKey(Url, on_delete=models.CASCADE, default="")
     timestamp = models.DateTimeField(default=datetime.datetime(2000,1,1))
     status_code = models.IntegerField(default=None, null=True)
@@ -29,10 +29,12 @@ class Response(models.Model):
     error_message = models.CharField(max_length=200, default='', blank=True, null=True) 
 
 class CrawlingTarget(models.Model):
+    ''' Represents a URL that should be crawled. '''
     url = models.CharField(max_length=200, unique=True)
     created = models.DateTimeField(auto_now_add=True)
 
 class Article(models.Model):
+    ''' Represents an article that has been scraped. '''
     title = models.CharField(max_length=1000)
     url = models.OneToOneField(Url, on_delete=models.CASCADE, related_name='article', unique=True)
     article_text = models.TextField(max_length=1_000_000)
@@ -47,6 +49,7 @@ class Article(models.Model):
         return 'Article(url=%r, title=%r)' % (self.url.url, self.title)
     
 class DashboardArticle(models.Model):
+    ''' Represents an article that has been recommended to a dashboard. '''
     like_or_dislike = models.CharField(max_length=200, choices=[('like', 'like'), ('dislike', 'dislike'), ('none', 'none')], default='none')
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     dashboard = models.ForeignKey(Dashboard, on_delete=models.CASCADE)

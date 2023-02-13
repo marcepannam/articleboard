@@ -14,7 +14,7 @@ class TestCase(TestCase):
         response = self.client.get('/dashboards')
         self.assertEquals(response.json()['dashboards'], [])
 
-        response = self.client.post('/dashboard', {'title': '1', 'keywords': 'kw'})
+        response = self.client.post('/dashboard', {'title': '1', 'keywords': 'kw', 'notifications': ''})
         id = (response.json()['id'])
 
         response = self.client.get('/dashboards')
@@ -36,7 +36,7 @@ class TestCase(TestCase):
 
     def test_recommendation_by_keyword(self):
         self.insert_some_articles()
-        self.client.post('/dashboard', {'title': '1', 'keywords': 'python'})
+        self.client.post('/dashboard', {'title': '1', 'keywords': 'python', 'notifications': ''})
         generate_recommendation.run_standard_recommendation(None, once=True, n_articles=1)
         
         dashboard = self.client.get('/dashboard?id=1').json()
@@ -45,7 +45,7 @@ class TestCase(TestCase):
 
     def test_recommendation_by_likes(self):
         self.insert_some_articles()
-        self.client.post('/dashboard', {'title': '1', 'keywords': 'foo'})
+        self.client.post('/dashboard', {'title': '1', 'keywords': 'foo', 'notifications': ''})
 
         generate_recommendation.run_standard_recommendation(None, once=True, n_articles=3)
 

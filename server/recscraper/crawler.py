@@ -13,6 +13,7 @@ from scrapy.spiders import Rule
 from scrapy.linkextractors import LinkExtractor
 
 def crawl(urls):
+    ''' Crawl the given urls and save all visited urls to the database. '''
     domains = [ url.split('/')[2] for url in urls ]
     print('crawling', urls, ' allowed domains:', domains)
     

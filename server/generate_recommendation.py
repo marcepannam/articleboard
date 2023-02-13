@@ -203,7 +203,7 @@ def run_standard_recommendation(this_dashboard, once=False, n_articles=n_article
     while True:
         dashboards = list(models.Dashboard.objects.all())
         for dashboard in dashboards:
-            if this_dashboard and this_dashboard != dashboard.title:
+            if this_dashboard and this_dashboard != dashboard.title and this_dashboard != dashboard.user.username:
                 continue
             generate_and_save_recommendations(
                 vectorizer, all_articles, all_vectorized_articles, dashboard, last_recommendations,
